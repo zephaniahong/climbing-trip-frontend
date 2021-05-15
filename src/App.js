@@ -5,9 +5,9 @@ import Trips from './components/Trips.jsx'
 function App() {
   return (
     <ClimbingProvider>
-    <div className='container'>
-      <Trips/>
-    </div>
+      <div className='container'>
+        <Trips/>
+      </div>
     </ClimbingProvider>
   );
 }

@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const initialState = {
   trips: [],
-  routes: [],
+  routes: null,
   currentTripIndex: null
 }
 
@@ -14,8 +14,9 @@ export function climbingReducer(state, action){
     case LOAD_ROUTES:
       return {...state, routes: action.payload}
     case SET_TRIP:
-      console.log(action.payload)
       return {...state, currentTripIndex: action.payload}
+    case EMPTY_ROUTES:
+      return {...state, routes:null}
     default:
       return state
   }
@@ -37,6 +38,7 @@ export function ClimbingProvider({children}) {
 const LOAD_TRIPS = 'LOAD_TRIPS'
 const LOAD_ROUTES = 'LOAD_ROUTES'
 const SET_TRIP = 'SET_TRIP'
+const EMPTY_ROUTES = 'EMPTY_ROUTES'
 
 
 // action functions
@@ -61,6 +63,11 @@ export function setSelectedTrip(index) {
   }
 }
 
+export function emptyRoutesAction() {
+  return {
+    type: EMPTY_ROUTES
+  }
+}
 
 const BACKEND_URL = 'http://localhost:3004'
 

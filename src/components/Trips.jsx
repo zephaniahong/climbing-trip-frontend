@@ -1,11 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ClimbingContext, loadTrips, loadRoutes } from "../store";
+import {
+  ClimbingContext,
+  loadTrips,
+  loadRoutes,
+  emptyRoutesAction,
+} from "../store";
 import RoutesModal from "./RoutesModal.jsx";
 
 const Trips = () => {
   const { store, dispatch } = useContext(ClimbingContext);
   const { trips, routes } = store;
   const [currentTripIndex, setCurrentTripIndex] = useState(null);
+
+  // function to clear states in order to close modal
+  const clearModal = () => {
+    dispatch(emptyRoutesAction());
+  };
+
   // display all trips upon loading of page
   useEffect(() => {
     loadTrips(dispatch);
@@ -30,6 +41,8 @@ const Trips = () => {
               bulk of the card's content.
             </p>
             <button
+              data-toggle="modal"
+              data-target="#exampleModal"
               onClick={() => {
                 setCurrentTripIndex(index);
                 displayRoutes(index);
@@ -44,8 +57,11 @@ const Trips = () => {
     });
     return (
       <div>
-        {routes.length > 0 && (
-          <RoutesModal title={trips[currentTripIndex].name} />
+        {routes && (
+          <RoutesModal
+            title={trips[currentTripIndex].name}
+            onConfirm={clearModal}
+          />
         )}
         <div className="row">{tripList}</div>
       </div>
