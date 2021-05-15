@@ -8,14 +8,13 @@
   background: rgba(0, 0, 0, 0.75);
 }
 .modalView {
-  /* position: fixed;
+  position: fixed;
   top: 10vh;
-  left: 10%;
-  width: 80%; */
+  width: 80%;
   /* height: 500px; */
   z-index: 100;
-  /* overflow: hidden;
-  background-color: aliceblue; */
+  overflow: hidden;
+  background-color: aliceblue;
 }
 
 .ul {
