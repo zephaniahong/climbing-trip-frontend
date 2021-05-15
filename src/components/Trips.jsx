@@ -1,25 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import {
-  ClimbingContext,
-  loadTrips,
-  setSelectedTrip,
-  loadRoutes,
-} from "../store";
+import { ClimbingContext, loadTrips, loadRoutes } from "../store";
+import RoutesModal from "./RoutesModal.jsx";
 
 const Trips = () => {
-  // const [selectedTripIndex, setSelectedTripIndex] = useState();
   const { store, dispatch } = useContext(ClimbingContext);
-  const { trips, currentTripIndex} = store;
-
+  const { trips, routes } = store;
+  const [currentTripIndex, setCurrentTripIndex] = useState(null);
   // display all trips upon loading of page
   useEffect(() => {
     loadTrips(dispatch);
   }, [dispatch]);
 
-
   // display routes for selected trip
   const displayRoutes = (tripIndex) => {
-    const tripId = trips[tripIndex].id
+    const tripId = trips[tripIndex].id;
     loadRoutes(dispatch, tripId);
   };
 
@@ -27,7 +21,7 @@ const Trips = () => {
   if (trips.length > 0) {
     const tripList = trips.map((trip, index) => {
       return (
-        <div key={trip.id} className="card col-4" style={{ width: "18rem" }}>
+        <div key={trip.id} className="card col-4">
           <img src="..." className="card-img-top" alt="..." />
           <div className="card-body">
             <h5 className="card-title">{trip.name}</h5>
@@ -36,7 +30,10 @@ const Trips = () => {
               bulk of the card's content.
             </p>
             <button
-              onClick={()=> displayRoutes(index)}
+              onClick={() => {
+                setCurrentTripIndex(index);
+                displayRoutes(index);
+              }}
               className="btn btn-primary"
             >
               Go somewhere
@@ -45,7 +42,14 @@ const Trips = () => {
         </div>
       );
     });
-    return <div className="row">{tripList}</div>;
+    return (
+      <div>
+        {routes.length > 0 && (
+          <RoutesModal title={trips[currentTripIndex].name} />
+        )}
+        <div className="row">{tripList}</div>
+      </div>
+    );
   }
   return null;
 };

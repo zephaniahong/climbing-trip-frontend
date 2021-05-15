@@ -76,7 +76,6 @@ export function loadTrips(dispatch){
 // load all routes for a chosen trip
 export function loadRoutes(dispatch, tripId) {
   axios.get(BACKEND_URL + `/routes/${tripId}`).then((result)=> {
-    console.log(result.data.routes)
     dispatch(loadRoutesAction(result.data.routes))
   })
 }
