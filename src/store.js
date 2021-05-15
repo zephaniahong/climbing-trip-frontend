@@ -17,6 +17,8 @@ export function climbingReducer(state, action){
       return {...state, currentTripIndex: action.payload}
     case EMPTY_ROUTES:
       return {...state, routes:null}
+    case UPDATE_ROUTES:
+      return {...state, routes: action.payload}
     default:
       return state
   }
@@ -39,6 +41,7 @@ const LOAD_TRIPS = 'LOAD_TRIPS'
 const LOAD_ROUTES = 'LOAD_ROUTES'
 const SET_TRIP = 'SET_TRIP'
 const EMPTY_ROUTES = 'EMPTY_ROUTES'
+const UPDATE_ROUTES = 'UPDATE_ROUTES'
 
 
 // action functions
@@ -66,6 +69,13 @@ export function setSelectedTrip(index) {
 export function emptyRoutesAction() {
   return {
     type: EMPTY_ROUTES
+  }
+}
+
+export function updateRoutes(routesArray){
+  return {
+    type: UPDATE_ROUTES,
+    payload: routesArray
   }
 }
 
