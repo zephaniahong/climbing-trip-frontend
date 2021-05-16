@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 export default function NewTripButton() {
-  const { store, dispatch } = useContext(ClimbingContext);
+  const { dispatch } = useContext(ClimbingContext);
   const [newtrip, setNewTrip] = useState("");
   const [show, setShow] = useState(false);
 
@@ -14,12 +14,10 @@ export default function NewTripButton() {
   };
   const handleShow = () => setShow(true);
   const handleSubmit = () => {
-    console.log("Add submit code here");
     createTrip(dispatch, newtrip);
     setShow(false);
   };
-  const handleChange = (event) => {
-    console.log(newtrip);
+  const handleInputChange = (event) => {
     setNewTrip(event.target.value);
   };
 
@@ -30,7 +28,7 @@ export default function NewTripButton() {
       </button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Add a new trip!</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <input
@@ -38,12 +36,12 @@ export default function NewTripButton() {
             placeholder="New Trip Name"
             className="form-control"
             value={newtrip}
-            onChange={handleChange}
+            onChange={handleInputChange}
           />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleSubmit}>
-            Save Changes
+            Add trip!
           </Button>
         </Modal.Footer>
       </Modal>
