@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 
 export default function NewTripButton() {
   const { store, dispatch } = useContext(ClimbingContext);
+  const [newtrip, setNewTrip] = useState("");
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -23,7 +24,9 @@ export default function NewTripButton() {
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          <input type="text" placeholder="New Trip Name" value={newtrip} />
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleSubmit}>
             Save Changes
