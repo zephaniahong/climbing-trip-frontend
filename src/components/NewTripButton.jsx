@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ClimbingContext } from "../store.js";
+import { ClimbingContext, createTrip } from "../store.js";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
@@ -15,6 +15,7 @@ export default function NewTripButton() {
   const handleShow = () => setShow(true);
   const handleSubmit = () => {
     console.log("Add submit code here");
+    createTrip(dispatch, newtrip);
     setShow(false);
   };
   const handleChange = (event) => {

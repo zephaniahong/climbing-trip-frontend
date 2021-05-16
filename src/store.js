@@ -38,7 +38,6 @@ export function loadTripsAction(trips) {
 }
 
 
-
 const BACKEND_URL = 'http://localhost:3004'
 
 // axios requests
@@ -46,4 +45,13 @@ export function loadTrips(dispatch){
   axios.get(BACKEND_URL + '/trips').then((result)=> {
     dispatch(loadTripsAction(result.data.trips))
   })
+}
+
+export function createTrip(dispatch, newtrip){
+  axios
+    .post(BACKEND_URL + '/newtrip', {newtrip})
+    .then((result) => {
+      // Just refresh the state rather than 
+      dispatch(loadTripsAction(result.data.trips))
+    })
 }
