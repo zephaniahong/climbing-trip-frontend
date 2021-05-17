@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ClimbingContext, createTrip } from "../store.js";
+import { ClimbingContext, createRoute } from "../store.js";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
@@ -47,9 +47,9 @@ export default function NewRouteButton() {
   };
   const handleShow = () => setShow(true);
   const handleSubmit = () => {
-    // createTrip(dispatch, newtrip);
     console.log(newRoute);
     console.log(newGrade);
+    createRoute(dispatch, { newRoute, newGrade });
     setShow(false);
   };
   const handleInputChange = (event) => {
