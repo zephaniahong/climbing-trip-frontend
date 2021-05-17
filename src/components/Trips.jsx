@@ -3,7 +3,7 @@ import {
   ClimbingContext,
   loadTrips,
   loadRoutes,
-  emptyRoutesAction,
+  setSelectedTrip,
 } from "../store";
 import RoutesModal from "./RoutesModal.jsx";
 
@@ -11,11 +11,16 @@ const Trips = () => {
   const { store, dispatch } = useContext(ClimbingContext);
   const { trips, routes } = store;
   const [currentTripIndex, setCurrentTripIndex] = useState(null);
+  const [toDisplayRoutes, setToDisplayRoutes] = useState(false);
 
-  // function to clear states in order to close modal
+  // function to close modal
   const clearModal = () => {
-    dispatch(emptyRoutesAction());
+    setToDisplayRoutes(false);
+    // dispatch(emptyRoutesAction());
   };
+
+  // function to save latest routes state when user clicks on save changes
+  const saveChanges = () => {};
 
   // display all trips upon loading of page
   useEffect(() => {
@@ -25,9 +30,10 @@ const Trips = () => {
   // display routes for selected trip
   const displayRoutes = (tripIndex) => {
     const tripId = trips[tripIndex].id;
+    dispatch(setSelectedTrip(tripIndex));
     loadRoutes(dispatch, tripId);
   };
-
+  console.log(store);
   // check if trips has been been set in state
   if (trips.length > 0) {
     const tripList = trips.map((trip, index) => {
@@ -46,6 +52,7 @@ const Trips = () => {
               onClick={() => {
                 setCurrentTripIndex(index);
                 displayRoutes(index);
+                setToDisplayRoutes(true);
               }}
               className="btn btn-primary"
             >
@@ -57,10 +64,11 @@ const Trips = () => {
     });
     return (
       <div>
-        {routes && (
+        {toDisplayRoutes && routes && (
           <RoutesModal
             title={trips[currentTripIndex].name}
             onConfirm={clearModal}
+            onSave={saveChanges}
           />
         )}
         <div className="row">{tripList}</div>
