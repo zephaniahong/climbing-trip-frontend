@@ -80,35 +80,3 @@ function RoutesModal(props) {
 }
 
 export default RoutesModal;
-
-{
-  /* <React.Fragment>
-  <Backdrop />
-  <DragDropContext onDragEnd={handleOnDragEnd}>
-    <Droppable droppableId="routes">
-      {(provided) => (
-        <ul
-          className="routes"
-          {...provided.droppableProps}
-          ref={provided.innerRef}
-        >
-          {routes.map(({ id, name }, index) => (
-            <Draggable key={id} draggableId={String(id)} index={index}>
-              {(provided) => (
-                <li
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                  ref={provided.innerRef}
-                >
-                  {name}
-                </li>
-              )}
-            </Draggable>
-          ))}
-          {provided.placeholder}
-        </ul>
-      )}
-    </Droppable>
-  </DragDropContext>
-</React.Fragment>; */
-}
