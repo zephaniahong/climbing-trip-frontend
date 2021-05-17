@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ClimbingContext, loadTrips, loadRoutes } from "../store";
+import {
+  ClimbingContext,
+  loadTrips,
+  loadRoutes,
+  setSelectedTrip,
+} from "../store";
 import RoutesModal from "./RoutesModal.jsx";
 
 const Trips = () => {
@@ -25,9 +30,10 @@ const Trips = () => {
   // display routes for selected trip
   const displayRoutes = (tripIndex) => {
     const tripId = trips[tripIndex].id;
+    dispatch(setSelectedTrip(tripIndex));
     loadRoutes(dispatch, tripId);
   };
-
+  console.log(store);
   // check if trips has been been set in state
   if (trips.length > 0) {
     const tripList = trips.map((trip, index) => {
