@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 export default function NewRouteButton() {
-  const { state, dispatch } = useContext(ClimbingContext);
+  const { store, dispatch } = useContext(ClimbingContext);
   const [newRoute, setNewRoute] = useState("");
   const [newGrade, setNewGrade] = useState("");
   const [show, setShow] = useState(false);
@@ -31,6 +31,9 @@ export default function NewRouteButton() {
     5.15,
   ];
 
+  console.log("---store---");
+  console.log(store);
+
   const difficultiesOptions = difficulties.map((grade) => {
     return (
       <option key={grade} value={grade}>
@@ -49,7 +52,8 @@ export default function NewRouteButton() {
   const handleSubmit = () => {
     console.log(newRoute);
     console.log(newGrade);
-    createRoute(dispatch, { newRoute, newGrade });
+    console.log(store.currentTripIndex);
+    // createRoute(dispatch, { newRoute, newGrade });
     setShow(false);
   };
   const handleInputChange = (event) => {
