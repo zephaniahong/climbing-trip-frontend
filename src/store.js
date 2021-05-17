@@ -15,8 +15,6 @@ export function climbingReducer(state, action){
       return {...state, routes: action.payload}
     case SET_TRIP:
       return {...state, currentTripIndex: action.payload}
-    case EMPTY_ROUTES:
-      return {...state, routes:null}
     case UPDATE_ROUTES:
       return {...state, routes: action.payload}
     default:
