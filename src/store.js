@@ -103,9 +103,11 @@ export function createTrip(dispatch, newtrip){
     })
 }
 
-export function createRoute(dispatch, route){
+export function createRoute(dispatch, routeObj){
+  console.log("sending...");
+  console.log(routeObj);
   axios
-    .post(BACKEND_URL + '/newroute', route)
+    .post(BACKEND_URL + '/newroute', routeObj)
     .then((result) => {
       // Just refresh the state rather than manipulate both front and back end
       dispatch(loadRoutesAction(result.data.routes))

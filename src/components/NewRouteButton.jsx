@@ -34,6 +34,8 @@ export default function NewRouteButton() {
   console.log("---store---");
   console.log(store);
 
+  const { trips, currentTripIndex } = store;
+
   const difficultiesOptions = difficulties.map((grade) => {
     return (
       <option key={grade} value={grade}>
@@ -52,8 +54,9 @@ export default function NewRouteButton() {
   const handleSubmit = () => {
     console.log(newRoute);
     console.log(newGrade);
-    console.log(store.currentTripIndex);
-    // createRoute(dispatch, { newRoute, newGrade });
+    const tripId = trips[currentTripIndex].id;
+    console.log(tripId);
+    createRoute(dispatch, { newRoute, newGrade, tripId });
     setShow(false);
   };
   const handleInputChange = (event) => {
@@ -72,7 +75,7 @@ export default function NewRouteButton() {
         <Modal.Body>
           <input
             type="text"
-            placeholder="New Trip Name"
+            placeholder="New Route Name"
             className="form-control"
             value={newRoute}
             onChange={handleInputChange}
