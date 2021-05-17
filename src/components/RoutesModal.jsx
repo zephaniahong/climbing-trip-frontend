@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { ClimbingContext, updateRoutes } from "../store";
 import classes from "./Routes.module.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import NewRouteButton from "./NewRouteButton.jsx";
 
 const Backdrop = (props) => {
   return <div onClick={props.onConfirm} className={classes.backdrop}></div>;
@@ -58,6 +59,7 @@ function RoutesModal(props) {
             </DragDropContext>
           </div>
           <div className="modal-footer">
+            <NewRouteButton />
             <button
               onClick={props.onConfirm}
               type="button"
