@@ -33,7 +33,15 @@ function RoutesModal(props) {
                     {...provided.droppableProps}
                     ref={provided.innerRef}
                   >
-                    {routes.map(({ id, name }, index) => (
+                    <li className="list-group-item d-flex">
+                      <span>
+                        <b>Route</b>
+                      </span>
+                      <span className="ml-auto">
+                        <b>Difficulty</b>
+                      </span>
+                    </li>
+                    {routes.map(({ id, name, difficulty }, index) => (
                       <Draggable
                         key={id}
                         draggableId={String(id)}
@@ -41,12 +49,13 @@ function RoutesModal(props) {
                       >
                         {(provided) => (
                           <li
-                            className="list-group-item"
+                            className="list-group-item d-flex"
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                             ref={provided.innerRef}
                           >
-                            {name}
+                            <span className="">{name}</span>
+                            <span className="ml-auto">{difficulty}</span>
                           </li>
                         )}
                       </Draggable>
