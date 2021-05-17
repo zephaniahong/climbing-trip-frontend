@@ -96,3 +96,11 @@ export function loadRoutes(dispatch, tripId) {
     dispatch(loadRoutesAction(result.data.routes))
   })
 }
+export function createTrip(dispatch, newtrip){
+  axios
+    .post(BACKEND_URL + '/newtrip', {newtrip})
+    .then((result) => {
+      // Just refresh the state rather than 
+      dispatch(loadTripsAction(result.data.trips))
+    })
+}
