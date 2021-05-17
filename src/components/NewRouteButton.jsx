@@ -9,15 +9,37 @@ export default function NewRouteButton() {
   const [newGrade, setNewGrade] = useState("");
   const [show, setShow] = useState(false);
   const difficulties = [
-    1, 2, 3, 4, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 5.1, 5.11,
-    5.12, 5.13, 5.14, 5.15,
+    1,
+    2,
+    3,
+    4,
+    5.0,
+    5.1,
+    5.2,
+    5.3,
+    5.4,
+    5.5,
+    5.6,
+    5.7,
+    5.8,
+    5.9,
+    "5.10",
+    5.11,
+    5.12,
+    5.13,
+    5.14,
+    5.15,
   ];
 
   const difficultiesOptions = difficulties.map((grade) => {
-    return <option key={grade}>{grade}</option>;
+    return (
+      <option key={grade} value={grade}>
+        {grade}
+      </option>
+    );
   });
 
-  const { routes } = state;
+  // const { routes } = state;
 
   const handleClose = () => {
     setShow(false);
@@ -25,7 +47,9 @@ export default function NewRouteButton() {
   };
   const handleShow = () => setShow(true);
   const handleSubmit = () => {
-    createTrip(dispatch, newtrip);
+    // createTrip(dispatch, newtrip);
+    console.log(newRoute);
+    console.log(newGrade);
     setShow(false);
   };
   const handleInputChange = (event) => {
@@ -50,11 +74,16 @@ export default function NewRouteButton() {
             onChange={handleInputChange}
           />
           <select
-            class="custom-select"
+            className="custom-select"
             onChange={(event) => {
               setNewGrade(event.target.value);
             }}
+            defaultValue="Select Grade"
           >
+            <option disabled hidden>
+              Select Grade
+            </option>
+
             {difficultiesOptions}
           </select>
         </Modal.Body>
