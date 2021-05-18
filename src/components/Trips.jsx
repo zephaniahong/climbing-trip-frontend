@@ -33,7 +33,6 @@ const Trips = () => {
     dispatch(setSelectedTrip(tripIndex));
     loadRoutes(dispatch, tripId);
   };
-  console.log(store);
   // check if trips has been been set in state
   if (trips.length > 0) {
     const tripList = trips.map((trip, index) => {

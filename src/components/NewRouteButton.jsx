@@ -31,9 +31,6 @@ export default function NewRouteButton() {
     5.15,
   ];
 
-  console.log("---store---");
-  console.log(store);
-
   const { trips, currentTripIndex } = store;
 
   const difficultiesOptions = difficulties.map((grade) => {
@@ -52,10 +49,7 @@ export default function NewRouteButton() {
   };
   const handleShow = () => setShow(true);
   const handleSubmit = () => {
-    console.log(newRoute);
-    console.log(newGrade);
     const tripId = trips[currentTripIndex].id;
-    console.log(tripId);
     createRoute(dispatch, { newRoute, newGrade, tripId });
     setShow(false);
   };

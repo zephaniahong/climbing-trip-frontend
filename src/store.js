@@ -104,8 +104,6 @@ export function createTrip(dispatch, newtrip){
 }
 
 export function createRoute(dispatch, routeObj){
-  console.log("sending...");
-  console.log(routeObj);
   axios
     .post(BACKEND_URL + '/newroute', routeObj)
     .then((result) => {
