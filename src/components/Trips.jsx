@@ -25,13 +25,14 @@ const Trips = () => {
   // display all trips upon loading of page
   useEffect(() => {
     loadTrips(dispatch);
+    loadRoutes(dispatch);
   }, [dispatch]);
-
+  console.log(store);
   // display routes for selected trip
   const displayRoutes = (tripIndex) => {
     const tripId = trips[tripIndex].id;
     dispatch(setSelectedTrip(tripIndex));
-    loadRoutes(dispatch, tripId);
+    // loadRoutes(dispatch, tripId);
   };
   // check if trips has been been set in state
   if (trips.length > 0) {
