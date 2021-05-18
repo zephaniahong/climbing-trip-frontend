@@ -10,14 +10,16 @@ const Backdrop = (props) => {
 
 function RoutesModal(props) {
   const { store, dispatch } = useContext(ClimbingContext);
-  const { routes } = store;
+  const { currentTripIndex, trips } = store;
 
   function handleOnDragEnd(result) {
     if (!result.destination) return;
-    const routeList = Array.from(routes);
+    const routeList = Array.from(props.selectedRoutes);
     const [reorderedRoutes] = routeList.splice(result.source.index, 1);
     routeList.splice(result.destination.index, 0, reorderedRoutes);
-    dispatch(updateRoutes(routeList));
+    const tripId = trips[currentTripIndex].id;
+    props.setSelectedRoutes(routeList);
+    updateRoutes(dispatch, routeList, tripId);
   }
   return (
     <React.Fragment>

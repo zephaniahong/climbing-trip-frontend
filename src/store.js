@@ -16,7 +16,7 @@ export function climbingReducer(state, action){
     case SET_TRIP:
       return {...state, currentTripIndex: action.payload}
     case UPDATE_ROUTES:
-      return {...state, routes: action.payload}
+      return {...state, routes: {...state.routes, ...action.payload}}
     default:
       return state
   }
@@ -70,7 +70,7 @@ export function emptyRoutesAction() {
   }
 }
 
-export function updateRoutes(routesArray){
+export function updateRoutesAction(routesArray){
   return {
     type: UPDATE_ROUTES,
     payload: routesArray
@@ -91,7 +91,7 @@ export function loadTrips(dispatch){
 // load all routes for a chosen trip
 export function loadRoutes(dispatch, tripId) {
   axios.get(BACKEND_URL + `/routes`).then((result)=> {
-    dispatch(loadRoutesAction(result.data.routes))
+    dispatch(loadRoutesAction(result.data.sortedRoutes))
   })
 }
 export function createTrip(dispatch, newtrip){
@@ -110,4 +110,10 @@ export function createRoute(dispatch, routeObj){
       // Just refresh the state rather than manipulate both front and back end
       dispatch(loadRoutesAction(result.data.routes))
     })
+}
+
+export function updateRoutes(dispatch, newRoutesArray, tripId) {
+  axios.post(BACKEND_URL + `/updateRoutes/${tripId}`, newRoutesArray).then((result)=> {
+    dispatch(updateRoutesAction(result.data))
+  })
 }

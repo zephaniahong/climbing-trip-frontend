@@ -27,7 +27,7 @@ const Trips = () => {
   useEffect(() => {
     loadTrips(dispatch);
     loadRoutes(dispatch);
-  }, [dispatch]);
+  }, [selectedRoutes]);
 
   // display routes for selected trip
   const displayRoutes = (tripIndex) => {
@@ -77,6 +77,7 @@ const Trips = () => {
             onConfirm={clearModal}
             onSave={saveChanges}
             selectedRoutes={selectedRoutes}
+            setSelectedRoutes={setSelectedRoutes}
           />
         )}
         <div className="row">{tripList}</div>
