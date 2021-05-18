@@ -12,6 +12,7 @@ const Trips = () => {
   const { trips, routes } = store;
   const [currentTripIndex, setCurrentTripIndex] = useState(null);
   const [toDisplayRoutes, setToDisplayRoutes] = useState(false);
+  const [selectedRoutes, setSelectedRoutes] = useState();
 
   // function to close modal
   const clearModal = () => {
@@ -27,12 +28,17 @@ const Trips = () => {
     loadTrips(dispatch);
     loadRoutes(dispatch);
   }, [dispatch]);
-  console.log(store);
+
   // display routes for selected trip
   const displayRoutes = (tripIndex) => {
     const tripId = trips[tripIndex].id;
-    dispatch(setSelectedTrip(tripIndex));
-    // loadRoutes(dispatch, tripId);
+    const displayRoutes = [];
+    for (let i = 0; i < routes.length; i += 1) {
+      if (routes[i].tripId === tripId) {
+        displayRoutes.push(routes[i]);
+      }
+    }
+    setSelectedRoutes(displayRoutes);
   };
   // check if trips has been been set in state
   if (trips.length > 0) {
@@ -50,6 +56,7 @@ const Trips = () => {
               data-toggle="modal"
               data-target="#exampleModal"
               onClick={() => {
+                dispatch(setSelectedTrip(index));
                 setCurrentTripIndex(index);
                 displayRoutes(index);
                 setToDisplayRoutes(true);
@@ -69,6 +76,7 @@ const Trips = () => {
             title={trips[currentTripIndex].name}
             onConfirm={clearModal}
             onSave={saveChanges}
+            selectedRoutes={selectedRoutes}
           />
         )}
         <div className="row">{tripList}</div>
