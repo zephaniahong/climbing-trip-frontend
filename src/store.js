@@ -140,8 +140,7 @@ export function createRoute(dispatch, routeObj){
   axios
     .post(BACKEND_URL + '/newroute', routeObj)
     .then((result) => {
-      // Just refresh the state rather than manipulate both front and back end
-      dispatch(addRoutesAction(result.data.routes))
+      dispatch(addRoutesAction(result.data))
     })
 }
 
