@@ -16,7 +16,23 @@ export function climbingReducer(state, action){
     case SET_TRIP:
       return {...state, currentTripIndex: action.payload}
     case UPDATE_ROUTES:
-      return {...state, routes: {...state.routes, ...action.payload}}
+      const updatedRoutes = [...action.payload]
+      // object of all the ids
+      let idObj = {}
+      for (let i = 0; i < updatedRoutes.length; i += 1) {
+        const id = updatedRoutes[i].id
+        idObj[id] = true
+      }
+      // only add existing routes to the updated routes if it doesn't exist 
+      const existingRoutes = [...state.routes]
+      for (let i = 0; i < existingRoutes.length; i+= 1) {
+        const existingId = existingRoutes[i].id
+        if (!idObj[existingId]) {
+          updatedRoutes.push(existingRoutes[i])
+        }
+      }
+      const sortedRoutes = updatedRoutes.sort((a, b) => ((a.order > b.order) ? 1 : -1));
+      return {...state, routes: sortedRoutes}
     default:
       return state
   }
