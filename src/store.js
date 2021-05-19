@@ -31,8 +31,17 @@ export function climbingReducer(state, action){
           updatedRoutes.push(existingRoutes[i])
         }
       }
+      // sort routes by order
       const sortedRoutes = updatedRoutes.sort((a, b) => ((a.order > b.order) ? 1 : -1));
       return {...state, routes: sortedRoutes}
+
+    case ADD_ROUTE:
+      // add new route to existing routes array
+      const newRoutes = [...state.routes]
+      newRoutes.push(action.payload)
+      //sort routes
+      const sortRoutes = newRoutes.sort((a, b) => ((a.order > b.order) ? 1 : -1));
+      return {...state, routes: sortRoutes}
     default:
       return state
   }
@@ -56,6 +65,7 @@ const LOAD_ROUTES = 'LOAD_ROUTES'
 const SET_TRIP = 'SET_TRIP'
 const EMPTY_ROUTES = 'EMPTY_ROUTES'
 const UPDATE_ROUTES = 'UPDATE_ROUTES'
+const ADD_ROUTE = 'ADD_ROUTE'
 
 
 // action functions
@@ -93,6 +103,13 @@ export function updateRoutesAction(routesArray){
   }
 }
 
+export function addRoutesAction(routeObj){
+  return {
+    type: ADD_ROUTE,
+    payload: routeObj
+  }
+}
+
 const BACKEND_URL = 'http://localhost:3004'
 
 // axios requests
@@ -124,7 +141,7 @@ export function createRoute(dispatch, routeObj){
     .post(BACKEND_URL + '/newroute', routeObj)
     .then((result) => {
       // Just refresh the state rather than manipulate both front and back end
-      dispatch(loadRoutesAction(result.data.routes))
+      dispatch(addRoutesAction(result.data.routes))
     })
 }
 
