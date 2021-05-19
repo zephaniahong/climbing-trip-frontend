@@ -23,7 +23,7 @@ const Trips = () => {
   useEffect(() => {
     loadTrips(dispatch);
     loadRoutes(dispatch);
-  }, [selectedRoutes]);
+  }, [routes]);
 
   // display routes for selected trip
   const displayRoutes = (tripIndex) => {
