@@ -80,13 +80,6 @@ function RoutesModal(props) {
             >
               Close
             </button>
-            <button
-              onClick={props.onConfirm}
-              type="button"
-              className="btn btn-primary"
-            >
-              Save changes
-            </button>
           </div>
         </div>
       </div>

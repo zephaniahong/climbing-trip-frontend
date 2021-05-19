@@ -17,11 +17,7 @@ const Trips = () => {
   // function to close modal
   const clearModal = () => {
     setToDisplayRoutes(false);
-    // dispatch(emptyRoutesAction());
   };
-
-  // function to save latest routes state when user clicks on save changes
-  const saveChanges = () => {};
 
   // display all trips upon loading of page
   useEffect(() => {
@@ -75,7 +71,6 @@ const Trips = () => {
           <RoutesModal
             title={trips[currentTripIndex].name}
             onConfirm={clearModal}
-            onSave={saveChanges}
             selectedRoutes={selectedRoutes}
             setSelectedRoutes={setSelectedRoutes}
           />
